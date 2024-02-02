@@ -30,19 +30,22 @@ TODO - Add example anarchy operator for managing an application with a Helm char
 
 image::docs/AnarchyDiagram.png[Anarchy Diagram,545,131]
 
-Each AnarchySubject is managed by an AnarchyGovernor.
-Each AnarchyGovernor is configured to run Ansible tasks on a single AnarchyRunner.
-AnarchySubjects can have AnarchyActions created to schedule task execution.
-AnarchyRuns are created for specific Ansible task execution, for processing an subject event handler, run an action, or handle an action callback event.
+Each *AnarchySubject* is managed by an *AnarchyGovernor*.
+
+Each *AnarchyGovernor* is configured to run _Ansible tasks_ on a single *AnarchyRunner*.
+
+*AnarchySubjects* can have *AnarchyActions* created to schedule task execution.
+
+*AnarchyRuns* are created for specific _Ansible task_ execution, for processing an subject event handler, run an action, or handle an action callback event.
 
 image::docs/AnarchyCallbackDiagram.png[Anarchy Diagram,748,338]
 
-. An action defined in the AnarchyGovernor config is scheduled for an AnarchySubject, creating an AnarchyAction
-. An AnarchyRun is created to execute the AnarchyAction's tasks
-. Ansible in the AnarchyRun calls a Job Template or Survey in Ansible Tower, passing the callback URL and token for the AnarchyAction
-. Ansible executing in Ansible Tower calls the AnarchyAction callback
-. A new AnarchyRun is created to process the callback from Tower
-. The AnarchyRun for the callback updates the status of the AnarchySubject
+. An action defined in the *AnarchyGovernor* config is scheduled for an *AnarchySubject*, creating an *AnarchyAction*.
+. An *AnarchyRun* is created to execute the *AnarchyAction*'s tasks.
+. _Ansible_ in the *AnarchyRun* calls a _Job Template_ or _Survey_ in _Ansible Automation Platform (or Ansible Tower)_, passing the callback URL and token for the *AnarchyAction*.
+. _Ansible_ executing in _Ansible Automation Platform (or Ansible Tower)_ calls the *AnarchyAction* callback
+. A new *AnarchyRun* is created to process the callback from _Ansible Automation Platform (or Ansible Tower)_
+. The *AnarchyRun* for the callback updates the status of the *AnarchySubject*
 
 == Installation
 
@@ -86,19 +89,25 @@ helm template anarchy helm/ | oc apply -f -
 
 == Anarchy Design
 
-The Anarchy Operator is configured with custom resource type AnarchyGovernor in order to manage AnarchySubject resources.
-Each AnarchySubject is managed according to a single AnarchyGovernor.
-The AnarchyGovernor defines actions to perform against APIs to instantiate and manage the AnarchySubject.
-Each action performed for an AnarchySubject according to the AnarchyGovernor definition is represented as an AnarchyAction custom resource.
-An AnarchyAction always begins with an call to an API.
-The Anarchy operator listens for callbacks to its own API for events relating to actions such as notifications that an action has completed, or encountered an error.
-The AnarchyGovernor defines event handlers for actions which may include scheduling further AnarchyActions to occur for the AnarchySubject.
+The *Anarchy Operator* is configured with custom resource type *AnarchyGovernor* in order to manage *AnarchySubject* resources.
 
-This repository includes a test suite that demonstrates these capabilities by calling a test API.
+Each *AnarchySubject* is managed according to a single *AnarchyGovernor*.
+
+The *AnarchyGovernor* defines actions to perform against _APIs_ to instantiate and manage the *AnarchySubject*.
+
+Each action performed for an *AnarchySubjec*t according to the *AnarchyGovernor* definition is represented as an *AnarchyAction* custom resource.
+
+An *AnarchyAction* always begins with an call to an _API_.
+
+The *Anarchy Operator* listens for callbacks to its own _API_ for events relating to actions such as notifications that an action has completed, or encountered an error.
+
+The *AnarchyGovernor* defines event handlers for actions which may include scheduling further *AnarchyActions* to occur for the *AnarchySubject*.
+
+This repository includes a test suite that demonstrates these capabilities by calling a test _API_.
 The usage of the test suite is explained in the "Testing" section below.
 The conceptual overview of the test design is described here.
 
-Let's start with the AnarchySubject definition:
+Let's start with the *AnarchySubject* definition:
 
 ----
 apiVersion: anarchy.gpte.redhat.com/v1
