@@ -125,11 +125,11 @@ spec:
     subdomain_base_suffix: .example.opentlc.com
 ----
 
-<1> The desired state of the resource, this is an arbitrary string which should be implemented by the AnarchyGovernor.
-<2> The test AnarchySubject references the name of the AnarchyGovernor that will manage it.
-<3> Each subject may include a list of parameters to pass to the API, though the governor and API get the final say in how and when the parameters are used.
+<1> The desired state of the resource, this is an arbitrary string which should be implemented by the *AnarchyGovernor*.
+<2> The test *AnarchySubject* references the name of the *AnarchyGovernor* that will manage it.
+<3> Each subject may include a list of parameters to pass to the _API_, though the governor and API get the final say in how and when the parameters are used.
 
-The test AnarchyGovernor definition is shown here:
+The test *AnarchyGovernor* definition is shown here:
 
 ----
 apiVersion: anarchy.gpte.redhat.com/v1
